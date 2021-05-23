@@ -51,44 +51,50 @@ class TypingGame:
         TypingGame.rank[name] = end - start
         print(TypingGame.rank)
 
-        def rankList(self):
-            ranklist = sorted(TypingGame.rank.items(), key = (lambda x:x[1])) 
-            print(ranklist)
-            cnt = 1
-            for k,v in ranklist:
-                print('{}등 {} 시간 : {:.0f}'.format(cnt, k, v))
-                cnt += 1
+    def rankList(self):
+        ranklist = sorted(TypingGame.rank.items(), key = (lambda x:x[1]))
+        print(ranklist)
+        cnt = 1
+        for k,v in ranklist:
+            print('{}등 {} 시간 : {:.0f}'.format(cnt, k, v))
+            cnt += 1
 
-        def endGame(self):
-            with open(dir + '/rank.pkl', 'wb')as f:
-                pickle.dump(TypingGame.rank,f)
-            print('프로그램 종료')
-            
+    def endGame(self):
+        with open(dir + '/rank.pkl', 'wb')as f:
+            pickle.dump(TypingGame.rank,f)
+        print('프로그램 종료')
+        
 
-        def menuDisplay(self):
-            print('123456')
-            menu = input('메뉴를 선택하세요 >>>')
-            return menu
+    def menuDisplay(self):
+        print('''
+1. 문제추가
+2. 문제저장
+3. 문제읽기
+4. 타자게임
+5. 등수리스트
+6. 종료하기''')
+        menu = input('메뉴를 선택하세요 >>>')
+        return menu
 
-        def exe(self, menu):
-            if menu == '1':
-                self.wordAppend()
-            elif menu == '2':
-                self.wordSavePik()
-            elif menu == '3':
-                self.wordLoadPik()
-            elif menu == '4':
-                self.game()
-            elif menu == '5':
-                self.rankList()
-            elif menu == '6':
-                self.endGame()
-            else:
-                print('메뉴선택이 잘못되었습니다.')
+    def exe(self, menu):
+        if menu == '1':
+            self.wordAppend()
+        elif menu == '2':
+            self.wordSavePik()
+        elif menu == '3':
+            self.wordLoadPik()
+        elif menu == '4':
+            self.game()
+        elif menu == '5':
+            self.rankList()
+        elif menu == '6':
+            self.endGame()
+        else:
+            print('메뉴선택이 잘못되었습니다.')
 
-        def __init__(self):
-            self.rankLoad()
-            while True:
-                self.exe(self.menuDisplay())
+    def __init__(self):
+        self.rankLoad()
+        while True:
+            self.exe(self.menuDisplay())
             
 TypingGame()
